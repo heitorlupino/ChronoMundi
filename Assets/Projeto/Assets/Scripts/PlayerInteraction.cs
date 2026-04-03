@@ -100,7 +100,8 @@ public class PlayerInteraction : MonoBehaviour
             // Novo Input System — trigger do controller
             var triggerAction = InputSystem.actions?.FindAction("XRI RightHand/Select");
             triggered = triggerAction != null && triggerAction.WasPressedThisFrame();
-            if (!triggered) triggered = Input.GetButtonDown("Fire1"); // fallback
+            if (!triggered && Application.isEditor)
+                triggered = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
 #else
             triggered = Input.GetButtonDown("Fire1");
 #endif
