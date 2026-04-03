@@ -1,23 +1,27 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class InteracleObject : MonoBehaviour, IInteractable // ✅ CORRIGIDO: implementa IInteractable
+/// <summary>
+/// Objeto interagível (artefato/exhibit) do ChronoMundi.
+/// Toca narração, exibe painel de informações e notifica o ExhibitManager.
+/// </summary>
+public class InteracleObject : MonoBehaviour, IInteractable
 {
     [Header("Narração")]
     public AudioClip narrationClip;
-
     [TextArea]
     public string subtitleText;
 
-    [Header("Info do Artefato (opcional)")]
+    [Header("Info do Artefato")]
     public string artifactName;
     [TextArea]
     public string artifactDescription;
 
     [Header("Interação Única")]
-    public bool interactOnlyOnce = false; // true = pode ser ouvido apenas uma vez
+    public bool interactOnlyOnce = false;
 
-    // ── Evento que o ExhibitManager escuta ────────────────────────────────
-    public System.Action<InteracleObject> OnInteracted;
+    // event (não field público) — impede código externo de invocar ou sobrescrever
+    public event System.Action<InteracleObject> OnInteracted;
 
     private bool _hasBeenInteracted = false;
 
@@ -30,19 +34,20 @@ public class InteracleObject : MonoBehaviour, IInteractable // ✅ CORRIGIDO: im
             return;
         }
 
+        // Narração / legenda
         if (NarratorSystem.Instance != null)
-        {
             NarratorSystem.Instance.PlayNarration(narrationClip, subtitleText);
-        }
         else
-        {
-            Debug.LogWarning("InteracleObject: NarratorSystem não encontrado na cena!");
-        }
+            Debug.LogWarning("[InteracleObject] NarratorSystem não encontrado!");
+
+        // Painel de informações do artefato
+        if (ArtifactInfoPanel.Instance != null)
+            ArtifactInfoPanel.Instance.Show(artifactName, artifactDescription);
 
         if (!_hasBeenInteracted)
         {
             _hasBeenInteracted = true;
-            OnInteracted?.Invoke(this); // Notifica ExhibitManager
+            OnInteracted?.Invoke(this);
         }
     }
 

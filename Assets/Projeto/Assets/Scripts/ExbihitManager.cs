@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 /// <summary>
-/// Gerencia todos os exhibits (objetos interativos) de uma cena.
-/// Controla highlight, progresso e feedback visual.
-/// Coloque um deste por cena histórica.
+/// Gerencia todos os exhibits (artefatos interativos) de uma cena histórica.
+/// Controla highlight, progresso e notifica TimelineEra ao completar tudo.
+/// Coloque UM deste por cena histórica.
 /// </summary>
 public class ExhibitManager : MonoBehaviour
 {
@@ -19,24 +19,25 @@ public class ExhibitManager : MonoBehaviour
     public UnityEngine.UI.Slider progressBar;
 
     [Header("Highlight nos objetos")]
-    public Material highlightMaterial;     // Material de destaque (outline, brilho etc.)
-    public Color    interactedColor = new Color(0.4f, 1f, 0.4f); // verde ao interagir
+    public Material highlightMaterial;
+    public Color interactedColor = new Color(0.4f, 1f, 0.4f);
+
+    [Header("Integração")]
+    [Tooltip("Referência opcional ao TimelineEra para disparar evento de conclusão.")]
+    public TimelineEra eraController;
 
     // ── Estado interno ─────────────────────────────────────────────────────
     private HashSet<InteracleObject> _interacted = new HashSet<InteracleObject>();
-    private Dictionary<InteracleObject, Material[]> _originalMaterials
-        = new Dictionary<InteracleObject, Material[]>();
+    private Dictionary<InteracleObject, Material[]> _originalMaterials = new Dictionary<InteracleObject, Material[]>();
 
     // ──────────────────────────────────────────────────────────────────────
     void Start()
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        // Registra total no GameManager
         if (GameManager.Instance != null)
             GameManager.Instance.RegisterExhibitTotal(sceneName, exhibits.Count);
 
-        // Guarda materiais originais e aplica highlight inicial
         foreach (var exhibit in exhibits)
         {
             if (exhibit == null) continue;
@@ -48,7 +49,6 @@ public class ExhibitManager : MonoBehaviour
 
                 if (highlightMaterial != null)
                 {
-                    // Adiciona highlight como material extra
                     var mats = new Material[rend.materials.Length + 1];
                     rend.materials.CopyTo(mats, 0);
                     mats[mats.Length - 1] = highlightMaterial;
@@ -56,7 +56,7 @@ public class ExhibitManager : MonoBehaviour
                 }
             }
 
-            // Escuta quando este exhibit for interagido
+            // Usa += em event (não em campo público) — seguro após correção do InteracleObject
             exhibit.OnInteracted += HandleExhibitInteracted;
         }
 
@@ -66,31 +66,26 @@ public class ExhibitManager : MonoBehaviour
     void OnDestroy()
     {
         foreach (var exhibit in exhibits)
-        {
             if (exhibit != null)
                 exhibit.OnInteracted -= HandleExhibitInteracted;
-        }
     }
 
-    // ── Chamado pelo InteracleObject ao ser interagido ─────────────────────
+    // ──────────────────────────────────────────────────────────────────────
     void HandleExhibitInteracted(InteracleObject exhibit)
     {
         if (_interacted.Contains(exhibit)) return;
 
         _interacted.Add(exhibit);
 
-        // Remove highlight e troca cor para "já visitado"
+        // Troca visual de "já visitado"
         Renderer rend = exhibit.GetComponent<Renderer>();
         if (rend != null && _originalMaterials.ContainsKey(exhibit))
         {
             rend.materials = _originalMaterials[exhibit];
-
-            // Tinge o primeiro material com a cor de "visitado"
             if (rend.material != null)
                 rend.material.color = interactedColor;
         }
 
-        // Registra no GameManager
         string sceneName = SceneManager.GetActiveScene().name;
         if (GameManager.Instance != null)
             GameManager.Instance.RegisterExhibitInteracted(sceneName);
@@ -102,7 +97,7 @@ public class ExhibitManager : MonoBehaviour
     void UpdateProgressUI()
     {
         int current = _interacted.Count;
-        int total   = exhibits.Count;
+        int total = exhibits.Count;
 
         if (progressText != null)
             progressText.text = $"{current} / {total} artefatos explorados";
@@ -113,11 +108,13 @@ public class ExhibitManager : MonoBehaviour
 
     void CheckCompletion()
     {
-        if (_interacted.Count >= exhibits.Count)
-        {
-            Debug.Log("[ExhibitManager] Todos os artefatos explorados nesta cena!");
-            // Aqui você pode disparar um evento especial, cutscene, etc.
-        }
+        if (_interacted.Count < exhibits.Count) return;
+
+        Debug.Log("[ExhibitManager] Todos os artefatos explorados nesta cena!");
+
+        // Notifica a era para tocar feedback de conclusão
+        if (eraController != null)
+            eraController.OnAllExhibitsComplete();
     }
 
     public float GetProgress() =>
