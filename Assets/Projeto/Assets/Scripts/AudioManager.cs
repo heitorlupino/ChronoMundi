@@ -71,6 +71,7 @@ public class AudioManager : MonoBehaviour
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+    void Start() => OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -101,6 +102,16 @@ public class AudioManager : MonoBehaviour
     {
         if (ActiveSource.clip == clip) return; // mesma trilha, não interrompe
 
+        if (crossfadeDuration <= 0f)
+        {
+            ActiveSource.Stop();
+            ActiveSource.volume = 0f;
+            ActiveSource.clip = clip;
+            ActiveSource.volume = targetVolume;
+            ActiveSource.Play();
+            return;
+        }
+
         InactiveSource.clip = clip;
         InactiveSource.volume = 0f;
         InactiveSource.Play();
@@ -112,6 +123,13 @@ public class AudioManager : MonoBehaviour
     void FadeOut()
     {
         StopAllCoroutines();
+        if (crossfadeDuration <= 0f)
+        {
+            ActiveSource.Stop();
+            ActiveSource.volume = 0f;
+            return;
+        }
+
         StartCoroutine(FadeSourceOut(ActiveSource));
     }
 

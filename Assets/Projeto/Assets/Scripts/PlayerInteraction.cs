@@ -1,7 +1,6 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 #endif
 
 /// <summary>
@@ -32,7 +31,6 @@ public class PlayerInteraction : MonoBehaviour
 
     // ── Estado interno ─────────────────────────────────────────────────────
     private IInteractable _currentTarget;
-    private bool _layerWarningShown = false;
 
     // ──────────────────────────────────────────────────────────────────────
     void Start()
@@ -45,7 +43,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             Debug.LogWarning("[PlayerInteraction] LayerMask 'interactableLayer' está em Nothing. " +
                              "Nenhum objeto será detectado. Configure no Inspector.");
-            _layerWarningShown = true;
         }
 
         SetPromptVisible(false);
@@ -111,7 +108,7 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
 #if ENABLE_INPUT_SYSTEM
-            triggered = Keyboard.current != null && Keyboard.current[Key.E].wasPressedThisFrame;
+            triggered = IsInteractionKeyPressedOnKeyboard();
 #else
             triggered = Input.GetKeyDown(interactionKey);
 #endif
@@ -142,4 +139,20 @@ public class PlayerInteraction : MonoBehaviour
         Gizmos.color = _currentTarget != null ? Color.green : Color.yellow;
         Gizmos.DrawRay(origin.position, origin.forward * interactionDistance);
     }
+
+#if ENABLE_INPUT_SYSTEM
+    bool IsInteractionKeyPressedOnKeyboard()
+    {
+        if (Keyboard.current == null) return false;
+
+        return interactionKey switch
+        {
+            KeyCode.E => Keyboard.current.eKey.wasPressedThisFrame,
+            KeyCode.F => Keyboard.current.fKey.wasPressedThisFrame,
+            KeyCode.Return => Keyboard.current.enterKey.wasPressedThisFrame,
+            KeyCode.Space => Keyboard.current.spaceKey.wasPressedThisFrame,
+            _ => Keyboard.current.eKey.wasPressedThisFrame // fallback seguro
+        };
+    }
+#endif
 }

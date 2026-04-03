@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -44,11 +45,8 @@ public class SceneFader : MonoBehaviour
         SetAlpha(0f);
     }
 
-    void Start()
-    {
-        // Fade in automático ao carregar qualquer cena
-        FadeIn();
-    }
+    void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     // ── API pública ────────────────────────────────────────────────────────
 
@@ -72,7 +70,14 @@ public class SceneFader : MonoBehaviour
     {
         yield return Fade(0f, 1f);          // escurece
         LoadingScreen.LoadScene(sceneName); // carrega (LoadingScreen cuida do resto)
-        // O fade de entrada é disparado automaticamente no Start() da próxima cena
+        // O fade de entrada é disparado automaticamente em OnSceneLoaded().
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Como este objeto persiste entre cenas, Start() não será chamado novamente.
+        // Então o fade de entrada precisa ocorrer sempre que uma nova cena carregar.
+        FadeIn();
     }
 
     IEnumerator Fade(float from, float to)
