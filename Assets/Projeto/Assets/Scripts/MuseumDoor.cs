@@ -40,4 +40,10 @@ public class MuseumDoor : MonoBehaviour, IInteractable // ✅ CORRIGIDO: impleme
 
         LoadingScreen.LoadScene(nomeScene); // ✅ Usa loading assíncrono
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            Interact();
+    }
 }

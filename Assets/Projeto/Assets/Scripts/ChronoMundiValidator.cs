@@ -27,7 +27,7 @@ public static class ChronoMundiValidator
         CheckType<GameManager>(report, ref errors, ref warnings);
         CheckType<NarratorSystem>(report, ref errors, ref warnings);
         CheckType<LoadingScreen>(report, ref errors, ref warnings);
-        CheckType<SceneBootstrapper>(report, ref errors, ref warnings, isStatic: true);
+        CheckType("SceneBootstrapper", report, ref errors, ref warnings, isStatic: true);
         CheckType<ArtifactInfoPanel>(report, ref errors, ref warnings);
         CheckType<SceneFader>(report, ref errors, ref warnings);
         CheckType<IInteractable>(report, ref errors, ref warnings, isInterface: true);
@@ -151,10 +151,13 @@ public static class ChronoMundiValidator
     static void CheckType<T>(List<string> report, ref int errors, ref int warnings,
                               bool isStatic = false, bool isInterface = false)
     {
-        string typeName = typeof(T).Name;
-        bool exists = isStatic || isInterface
-            ? FindScriptAsset(typeName)
-            : FindScriptAsset(typeName);
+        CheckType(typeof(T).Name, report, ref errors, ref warnings, isStatic, isInterface);
+    }
+
+    static void CheckType(string typeName, List<string> report, ref int errors, ref int warnings,
+                          bool isStatic = false, bool isInterface = false)
+    {
+        bool exists = FindScriptAsset(typeName);
 
         if (exists) report.Add($"  ✔ {typeName}.cs encontrado");
         else { report.Add($"  ✘ ERRO: {typeName}.cs NÃO encontrado!"); errors++; }

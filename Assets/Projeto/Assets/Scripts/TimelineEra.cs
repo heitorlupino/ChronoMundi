@@ -73,6 +73,17 @@ public class TimelineEra : MonoBehaviour
 
         // 4. Libera jogador
         SetPlayerControl(true);
+
+        // 5. Ativa destaque da saída imediatamente
+        if (returnPoint != null)
+        {
+            var highlight = returnPoint.GetComponent<HighlightController>();
+            if (highlight != null)
+            {
+                highlight.enabled = true;
+                highlight.StartHighlight();
+            }
+        }
     }
 
     void SetPlayerControl(bool enabled)
