@@ -17,6 +17,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu Instance { get; private set; }
     [Header("Painel de Pausa")]
     public GameObject pausePanel;
     public bool isPaused = false;
@@ -36,6 +37,15 @@ public class PauseMenu : MonoBehaviour
     // ──────────────────────────────────────────────────────────────────────
     void Start()
     {
+        // Registra instância para acesso global
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogWarning("[PauseMenu] Outra instância já existe. Esta será destruída.");
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
+
         SetPaused(false);
 
         if (btnResume != null) btnResume.onClick.AddListener(Resume);
@@ -48,6 +58,8 @@ public class PauseMenu : MonoBehaviour
         if (btnResume != null) btnResume.onClick.RemoveListener(Resume);
         if (btnMenu != null) btnMenu.onClick.RemoveListener(GoToMenu);
         if (btnQuit != null) btnQuit.onClick.RemoveListener(QuitGame);
+
+        if (Instance == this) Instance = null;
     }
 
     void Update()

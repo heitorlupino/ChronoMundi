@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 /// <summary>
 /// Retorna o jogador ao MuseuHub.
@@ -50,6 +51,9 @@ public class SimpleReturnToMuseum : MonoBehaviour, IInteractable
         if (btnCancel  != null) btnCancel.onClick.AddListener(CancelReturn);
     }
 
+    // Previne reentradas ao tentar voltar
+    bool _isProcessing = false;
+
     void OnDestroy()
     {
         if (returnButton != null) returnButton.onClick.RemoveListener(TryReturn);
@@ -61,8 +65,7 @@ public class SimpleReturnToMuseum : MonoBehaviour, IInteractable
     void OnTriggerEnter(Collider other)
     {
         if (activationMode != ActivationMode.OnTrigger) return;
-
-        if (other.CompareTag("Player"))
+        if (IsPlayerCollider(other))
             TryReturn();
     }
 
@@ -70,6 +73,7 @@ public class SimpleReturnToMuseum : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (activationMode != ActivationMode.Interactable) return;
+        if (_isProcessing || LoadingScreen.IsLoading) return;
         TryReturn();
     }
 
@@ -99,6 +103,10 @@ public class SimpleReturnToMuseum : MonoBehaviour, IInteractable
 
     void ExecuteReturn()
     {
+        if (_isProcessing || LoadingScreen.IsLoading) return;
+        _isProcessing = true;
+        StartCoroutine(ResetProcessing());
+
         Debug.Log("[SimpleReturnToMuseum] Retornando ao museu...");
 
         // Toca narração de saída se houver
@@ -106,5 +114,21 @@ public class SimpleReturnToMuseum : MonoBehaviour, IInteractable
             NarratorSystem.Instance.PlayNarration(exitNarrationClip, exitSubtitleText);
 
         LoadingScreen.LoadScene(museumSceneName); // ✅ Usa loading assíncrono
+    }
+
+    IEnumerator ResetProcessing()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        _isProcessing = false;
+    }
+
+    bool IsPlayerCollider(Collider other)
+    {
+        if (other == null) return false;
+        if (other.CompareTag("Player")) return true;
+        if (other.GetComponentInParent<CharacterController>() != null) return true;
+        if (other.GetComponentInParent<PlayerInteraction>() != null) return true;
+        if (other.GetComponentInParent<DesktopPlayerController>() != null) return true;
+        return false;
     }
 }

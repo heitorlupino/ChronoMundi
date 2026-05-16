@@ -14,6 +14,11 @@ public class LoadingScreen : MonoBehaviour
 {
     public static LoadingScreen Instance { get; private set; }
 
+    // Indica se já existe um carregamento em andamento para evitar reentradas
+    bool _isLoading = false;
+
+    public static bool IsLoading => Instance != null && Instance._isLoading;
+
     [Header("UI de Loading")]
     public GameObject loadingPanel;
     public Slider     progressBar;
@@ -51,10 +56,21 @@ public class LoadingScreen : MonoBehaviour
     // ── API estática — use isso de qualquer script ────────────────────────
     public static void LoadScene(string sceneName)
     {
+        if (IsLoading)
+        {
+            Debug.Log($"[LoadingScreen] Já há um carregamento em andamento. Ignorando '{sceneName}'.");
+            return;
+        }
+
         if (Instance != null)
+        {
+            Instance._isLoading = true;
             Instance.StartCoroutine(Instance.LoadAsync(sceneName));
+        }
         else
+        {
             SceneManager.LoadScene(sceneName); // fallback sem loading screen
+        }
     }
 
     // ── Coroutine de carregamento ──────────────────────────────────────────
@@ -101,5 +117,8 @@ public class LoadingScreen : MonoBehaviour
 
         // Esconde painel
         if (loadingPanel != null) loadingPanel.SetActive(false);
+        // Libera flag de carregamento para permitir novos loads
+        _isLoading = false;
+        }
+
     }
-}

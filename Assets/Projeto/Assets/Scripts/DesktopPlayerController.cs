@@ -137,7 +137,13 @@ public class DesktopPlayerController : MonoBehaviour
         escPressed = Input.GetKeyDown(KeyCode.Escape);
 #endif
         if (escPressed)
+        {
+            // Se existir um PauseMenu na cena, deixamos o PauseMenu tratar do ESC
+            if (PauseMenu.Instance != null)
+            return;
+
             LockCursor(!_cursorLocked);
+        }
     }
 
     void LockCursor(bool locked)

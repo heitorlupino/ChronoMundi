@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement; // ✅ CORRIGIDO: using necessário para SceneManager
 
 public class MuseumDoor : MonoBehaviour, IInteractable // ✅ CORRIGIDO: implementa IInteractable
@@ -13,9 +14,25 @@ public class MuseumDoor : MonoBehaviour, IInteractable // ✅ CORRIGIDO: impleme
     [Header("Restrição de Acesso (opcional)")]
     public bool requiresProgress = false; // true = só abre se jogador visitou outra cena antes
     public string requiredScene  = "";    // cena que precisa ter sido visitada
-
+    // Previne múltiplas ativações consecutivas (reentradas)
+    bool _isProcessing = false;
     public void Interact()
     {
+        if (_isProcessing)
+        {
+            Debug.Log("[MuseumDoor] Interação ignorada — já em processamento.");
+            return;
+        }
+
+        if (LoadingScreen.IsLoading)
+        {
+            Debug.Log("[MuseumDoor] Ignorando interação — tela de loading ativa.");
+            return;
+        }
+
+        _isProcessing = true;
+        StartCoroutine(ResetProcessing());
+
         // Verifica pré-requisito de progresso
         if (requiresProgress && GameManager.Instance != null)
         {
@@ -41,9 +58,25 @@ public class MuseumDoor : MonoBehaviour, IInteractable // ✅ CORRIGIDO: impleme
         LoadingScreen.LoadScene(nomeScene); // ✅ Usa loading assíncrono
     }
 
+    IEnumerator ResetProcessing()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        _isProcessing = false;
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (IsPlayerCollider(other))
             Interact();
+    }
+
+    bool IsPlayerCollider(Collider other)
+    {
+        if (other == null) return false;
+        if (other.CompareTag("Player")) return true;
+        if (other.GetComponentInParent<CharacterController>() != null) return true;
+        if (other.GetComponentInParent<PlayerInteraction>() != null) return true;
+        if (other.GetComponentInParent<DesktopPlayerController>() != null) return true;
+        return false;
     }
 }
