@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Chip_FuturoTech
+  m_EditorClassIdentifier: 
+  artifactID: Chip_FuturoTech
+  era: 2
+  subtitleText: "Computa\xE7\xE3o qu\xE2ntica \u2014 al\xE9m dos limites do sil\xEDcio"
+  artifactName: "Processador Qu\xE2ntico"
+  artifactDescription: "O processador qu\xE2ntico opera com qubits \u2014 unidades
+    de informa\xE7\xE3o que, ao contr\xE1rio dos bits cl\xE1ssicos (0 ou 1), existem
+    em superposi\xE7\xE3o de ambos os estados simultaneamente.\n\nIsso permite que
+    um computador qu\xE2ntico explore bilh\xF5es de possibilidades em paralelo. Um
+    problema de otimiza\xE7\xE3o que levaria um supercomputador cl\xE1ssico 10.000
+    anos pode ser resolvido em minutos.\n\nAplica\xE7\xF5es cr\xEDticas incluem:
+    simula\xE7\xE3o molecular para descoberta acelerada de rem\xE9dios, quebra (e
+    cria\xE7\xE3o) de criptografia inquebr\xE1vel, otimiza\xE7\xE3o de cadeias log\xEDsticas
+    globais e modelagem clim\xE1tica com precis\xE3o sem precedentes. Este chip representa
+    a maior revolu\xE7\xE3o computacional desde o transistor."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

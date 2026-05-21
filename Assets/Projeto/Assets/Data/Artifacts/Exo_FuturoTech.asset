@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Exo_FuturoTech
+  m_EditorClassIdentifier: 
+  artifactID: Exo_FuturoTech
+  era: 2
+  subtitleText: "Exoesqueleto neural \u2014 a fus\xE3o entre humano e m\xE1quina"
+  artifactName: Exoesqueleto Neural
+  artifactDescription: "O exoesqueleto neural \xE9 controlado diretamente por sinais
+    el\xE9tricos do c\xE9rebro, capturados por eletrodos n\xE3o-invasivos posicionados
+    na superf\xEDcie do cr\xE2nio.\n\nO sistema de IA interpreta padr\xF5es de ativa\xE7\xE3o
+    neural em microssegundos e os traduz em movimentos mec\xE2nicos precisos. Pacientes
+    com les\xE3o medular completa voltam a andar. Trabalhadores industriais carregam
+    200kg sem esfor\xE7o. Cirurgi\xF5es operam com tremor zero e precis\xE3o sub-milim\xE9trica.\n\nRepresenta
+    a converg\xEAncia de quatro \xE1reas: neuroci\xEAncia, rob\xF3tica, intelig\xEAncia
+    artificial e ci\xEAncia dos materiais. O exoesqueleto n\xE3o \xE9 uma pr\xF3tese
+    \u2014 \xE9 uma extens\xE3o do corpo humano que elimina os limites entre biologia
+    e tecnologia."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Holograma_FuturoTech
+  m_EditorClassIdentifier: 
+  artifactID: Holograma_FuturoTech
+  era: 2
+  subtitleText: "Proje\xE7\xE3o hologr\xE1fica \u2014 o futuro das interfaces humano-m\xE1quina"
+  artifactName: "Interface Hologr\xE1fica"
+  artifactDescription: "A interface hologr\xE1fica projeta imagens tridimensionais
+    diretamente no espa\xE7o f\xEDsico usando lasers e difra\xE7\xE3o de luz coerente,
+    sem necessidade de tela ou superf\xEDcie.\n\nAo contr\xE1rio de proje\xE7\xF5es
+    comuns, os hologramas t\xEAm profundidade real: o observador pode se mover ao
+    redor da imagem e v\xEA-la de diferentes \xE2ngulos. Sensores de gesto permitem
+    manipular os dados com as m\xE3os diretamente no ar.\n\nAplica\xE7\xF5es incluem
+    salas cir\xFArgicas onde m\xE9dicos veem \xF3rg\xE3os projetados sobre o paciente
+    em tempo real, ambientes de colabora\xE7\xE3o global imersiva e interfaces adaptativas
+    que se reconfiguram para cada usu\xE1rio."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

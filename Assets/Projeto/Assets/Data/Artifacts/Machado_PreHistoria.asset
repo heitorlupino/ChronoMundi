@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Machado_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Machado_PreHistoria
+  era: 0
+  subtitleText: "Machado de pedra \u2014 2,5 milh\xF5es de anos"
+  artifactName: Machado de Pedra
+  artifactDescription: "O machado de pedra lascada \xE9 uma das ferramentas mais
+    antigas j\xE1 criadas pelo ser humano, com aproximadamente 2,5 milh\xF5es de
+    anos.\n\nFabricado por meio da t\xE9cnica de lascamento \u2014 bater uma pedra
+    contra outra para criar uma borda afiada \u2014 era usado para cortar carne,
+    quebrar ossos e trabalhar madeira.\n\nRepresenta o primeiro salto tecnol\xF3gico
+    da humanidade: transformar um recurso natural bruto em uma ferramenta com prop\xF3sito
+    definido. Esse momento marcou a separa\xE7\xE3o definitiva entre os homin\xEDdeos
+    e os outros primatas."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

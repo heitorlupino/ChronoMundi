@@ -7,113 +7,282 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 /// <summary>
-/// Adiciona o personagem guia a todas as cenas históricas.
-/// Cada era recebe um guia com nome, cor e diálogos próprios.
+/// Adiciona e configura os personagens guia em todas as cenas históricas.
+///
+/// Correções v2:
+///   - Name tag rotacionada 180° em Y para ficar de frente ao jogador
+///   - Artefatos recriados nas posições/escalas reais da cena
+///   - Narração preenchida com textos históricos completos
+///   - Comentários do guia sincronizados com cada artefato específico
+///   - IdadeMedia: artefatos criados do zero pois não existiam
 ///
 /// Menu: ChronoMundi → 🧙 Adicionar Personagem Guia — Todas as Cenas
 /// </summary>
 public static class CompanionBuilder
 {
     const string SCENES_PATH = "Assets/Projeto/Assets/Scenes/";
+    const string MAT_PATH    = "Assets/Projeto/Assets/Materials/Environment/";
 
-    // ── Configuração por era ───────────────────────────────────────────────
+    // ════════════════════════════════════════════════════════════════════
+    // CONFIG DOS GUIAS
+    // ════════════════════════════════════════════════════════════════════
 
-    class EraCompanionConfig
+    class CompanionConfig
     {
-        public string sceneName;
-        public string companionName;
-        public Color  color;
-        public string introLine;
-        public string allDoneLine;
+        public string       sceneName;
+        public string       companionName;
+        public Color        color;
+        public string       introLine;
+        public string       allDoneLine;
+        // Comentários indexados por artefato (mesmo índice que artifacts abaixo)
         public List<string> comments;
-        public Vector3 spawnOffset;
+        public Vector3      spawnOffset;
     }
 
-    static readonly List<EraCompanionConfig> CONFIGS = new()
+    // Dados completos de cada artefato por cena
+    class ArtifactData
     {
-        new EraCompanionConfig
-        {
-            sceneName     = "PreHistoriaScene",
-            companionName = "Uruk",
-            color         = new Color(1f, 0.55f, 0.1f), // laranja pedra
-            introLine     = "Uggh! Bem-vindo à Pré-História! Sou Uruk. " +
-                            "Este lugar tem muita coisa para te mostrar. Vai lá, explora!",
-            allDoneLine   = "Você viu tudo! Os ancestrais ficariam orgulhosos. " +
-                            "Hora de voltar ao museu, amigo.",
-            comments      = new List<string>
-            {
-                "Isso aí! Nossos ancestrais usavam isso no dia a dia. " +
-                "Simples, mas muito inteligente para a época.",
-                "Viu? Sem tecnologia nenhuma — só força, criatividade e necessidade.",
-                "Cada objeto desses carrega milênios de história nas mãos."
-            },
-            spawnOffset = new Vector3(2f, 0f, 0f)
-        },
+        public string  goName;
+        public string  artifactName;
+        public string  subtitle;
+        public string  narration;   // texto completo para o NarratorSystem
+        public Vector3 position;
+        public Vector3 scale;
+        public Color   glowColor;
+    }
 
-        new EraCompanionConfig
+    // ── PRÉ-HISTÓRIA ──────────────────────────────────────────────────────
+    static readonly List<ArtifactData> PREHISTORIA_ARTIFACTS = new()
+    {
+        new ArtifactData
         {
-            sceneName     = "IdadeMediaScene",
-            companionName = "Sir Aldric",
-            color         = new Color(0.8f, 0.7f, 0.15f), // dourado medieval
-            introLine     = "Salve, viajante! Sou Sir Aldric, cavaleiro e guardião deste museu. " +
-                            "Deixe-me guiá-lo pelos tesouros da Idade Média.",
-            allDoneLine   = "Honroso! Você conheceu todas as relíquias desta era. " +
-                            "O rei certamente ficaria impressionado. Retorne ao museu.",
-            comments      = new List<string>
-            {
-                "Este artefato pertenceu a nobres e guerreiros. " +
-                "Cada marca conta uma batalha, cada detalhe uma tradição.",
-                "Na Idade Média, objetos assim valiam fortunas. " +
-                "Passavam de pai para filho por gerações.",
-                "Os artesãos medievais levavam anos para dominar sua arte. " +
-                "Veja a precisão deste trabalho."
-            },
-            spawnOffset = new Vector3(2f, 0f, 0f)
+            goName       = "Artefato_Machado",
+            artifactName = "Machado de Pedra",
+            subtitle     = "Machado de pedra — 2,5 milhões de anos",
+            narration    = "O machado de pedra lascada é uma das ferramentas mais antigas já criadas " +
+                           "pelo ser humano. Fabricado há aproximadamente 2,5 milhões de anos, era usado " +
+                           "para cortar carne, quebrar ossos e trabalhar madeira. Representa o primeiro " +
+                           "salto tecnológico da humanidade: transformar um recurso natural bruto em " +
+                           "uma ferramenta com propósito definido.",
+            position  = new Vector3(2f, 0.9f, 0f),
+            scale     = new Vector3(0.28f, 0.06f, 0.16f),
+            glowColor = new Color(1f, 0.5f, 0.1f),
         },
-
-        new EraCompanionConfig
+        new ArtifactData
         {
-            sceneName     = "FuturoTechScene",
-            companionName = "ARIA",
-            color         = new Color(0.1f, 0.85f, 1f), // ciano futurista
-            introLine     = "Inicializando sistema de guia... Olá! Sou ARIA, " +
-                            "sua assistente de inteligência artificial. " +
-                            "Bem-vindo ao setor Futuro Tecnológico. Vamos explorar?",
-            allDoneLine   = "Análise completa. Você processou todos os artefatos do setor. " +
-                            "Retorne ao hub central para prosseguir.",
-            comments      = new List<string>
-            {
-                "Fascinante. Este objeto representa um salto tecnológico " +
-                "que mudou a humanidade para sempre.",
-                "Meus sensores detectam que você está impressionado — " +
-                "e com razão! Esta tecnologia era impensável décadas atrás.",
-                "Registro histórico confirmado. Este artefato marcou " +
-                "o início de uma nova era para a civilização."
-            },
-            spawnOffset = new Vector3(2f, 0f, 0f)
-        }
+            goName       = "Artefato_Osso",
+            artifactName = "Osso Numerado",
+            subtitle     = "Os primeiros números da humanidade",
+            narration    = "O Osso de Ishango, encontrado no atual Congo e datado de cerca de 25.000 anos, " +
+                           "é considerado por muitos pesquisadores o primeiro artefato matemático da história. " +
+                           "Suas marcas entalhadas podem representar contagens lunares ou sequências " +
+                           "numéricas primitivas. Ele evidencia que a capacidade de abstração matemática " +
+                           "surgiu muito antes da escrita ou das civilizações formais.",
+            position  = new Vector3(0f, 1.0f, 3.5f),
+            scale     = new Vector3(0.1f, 0.45f, 0.1f),
+            glowColor = new Color(0.9f, 0.8f, 0.5f),
+        },
+        new ArtifactData
+        {
+            goName       = "Artefato_Pintura",
+            artifactName = "Pintura Rupestre",
+            subtitle     = "Arte nas pedras — os primeiros registros humanos",
+            narration    = "As pinturas rupestres são expressões artísticas feitas com pigmentos minerais " +
+                           "como ocre e carvão nas paredes de cavernas. As mais antigas têm mais de 40.000 anos. " +
+                           "Representam animais, caçadas e rituais, sendo o primeiro sistema de comunicação " +
+                           "visual da humanidade. Mais do que decoração, eram possivelmente registros " +
+                           "sagrados e formas de transmitir conhecimento entre gerações.",
+            position  = new Vector3(-2f, 1.1f, 2.5f),
+            scale     = new Vector3(0.8f, 0.6f, 0.06f),
+            glowColor = new Color(0.6f, 0.3f, 0.1f),
+        },
+    };
+
+    static readonly CompanionConfig PREHISTORIA_CONFIG = new()
+    {
+        sceneName     = "PreHistoriaScene",
+        companionName = "Uruk",
+        color         = new Color(1f, 0.55f, 0.1f),
+        introLine     = "Uggh! Bem-vindo à Pré-História! Sou Uruk. " +
+                        "Muita coisa aqui para você ver. Toca nos objetos para descobrir!",
+        allDoneLine   = "Você viu tudo! Os ancestrais ficariam orgulhosos. " +
+                        "Hora de voltar ao museu, amigo.",
+        comments      = new List<string>
+        {
+            // índice 0 → Machado
+            "Isso! Com essa pedra cortava carne, madeira, tudo. Simples, mas muito inteligente!",
+            // índice 1 → Osso
+            "Olha esses entalhes. Cada risco um número. Meus ancestrais já contavam as luas!",
+            // índice 2 → Pintura
+            "Bonito, não é? Faziam com carvão e pedra colorida. Guardavam histórias na rocha.",
+        },
+        spawnOffset = new Vector3(2.2f, 0f, -1.5f),
+    };
+
+    // ── IDADE MÉDIA ───────────────────────────────────────────────────────
+    static readonly List<ArtifactData> IDADEMEDIA_ARTIFACTS = new()
+    {
+        new ArtifactData
+        {
+            goName       = "Artefato_Pergaminho",
+            artifactName = "Pergaminho Iluminado",
+            subtitle     = "Os livros da Idade Média — feitos à mão por anos",
+            narration    = "Os manuscritos iluminados eram produzidos à mão por monges escribas " +
+                           "em mosteiros medievais. Cada página podia levar semanas de trabalho, " +
+                           "adornada com letras capitais decoradas, ilustrações em folha de ouro " +
+                           "e pigmentos raros vindos de toda a Europa e do Oriente. " +
+                           "Eram os livros mais preciosos da Idade Média, preservando não só " +
+                           "textos religiosos, mas também filosofia clássica, medicina e astronomia.",
+            position  = new Vector3(0f, 1.15f, 4.5f),
+            scale     = new Vector3(0.38f, 0.03f, 0.28f),
+            glowColor = new Color(1f, 0.85f, 0.1f),
+        },
+        new ArtifactData
+        {
+            goName       = "Artefato_Escudo",
+            artifactName = "Escudo Heráldico",
+            subtitle     = "Identidade e honra representadas em metal",
+            narration    = "Os brasões heráldicos medievais funcionavam como identidades visuais " +
+                           "das famílias nobres — equivalentes aos logos modernos. " +
+                           "Cada elemento tinha significado preciso: a cor vermelha simbolizava coragem " +
+                           "e ousadia; o leão, força e nobreza; as listras, distinção em batalha. " +
+                           "O escudo era passado de pai para filho e reconhecido em combate " +
+                           "mesmo com a viseira fechada, sendo essencial para identificação no campo de batalha.",
+            position  = new Vector3(-3f, 1.3f, 2f),
+            scale     = new Vector3(0.55f, 0.7f, 0.09f),
+            glowColor = new Color(1f, 0.1f, 0.1f),
+        },
+        new ArtifactData
+        {
+            goName       = "Artefato_Espada",
+            artifactName = "Espada de Cavaleiro",
+            subtitle     = "Símbolo de poder e nobreza da Idade Média",
+            narration    = "A espada de cavaleiro era muito mais que uma arma: era um símbolo de status, " +
+                           "honra e compromisso com o código da cavalaria. " +
+                           "Forjada por ferreiros especializados ao longo de semanas, " +
+                           "cada espada era praticamente única. O aço era dobrado e martelado centenas " +
+                           "de vezes para obter a dureza e flexibilidade certas. " +
+                           "Cavaleiros eram agraciados com suas espadas em cerimônias formais " +
+                           "e muitas vezes as recebiam com nomes próprios.",
+            position  = new Vector3(3f, 1.2f, 2f),
+            scale     = new Vector3(0.08f, 0.75f, 0.06f),
+            glowColor = new Color(0.7f, 0.8f, 1f),
+        },
+    };
+
+    static readonly CompanionConfig IDADEMEDIA_CONFIG = new()
+    {
+        sceneName     = "IdadeMediaScene",
+        companionName = "Sir Aldric",
+        color         = new Color(0.85f, 0.72f, 0.15f),
+        introLine     = "Salve, viajante! Sou Sir Aldric, cavaleiro guardião deste museu. " +
+                        "Permita-me guiá-lo pelos tesouros da Idade Média.",
+        allDoneLine   = "Honroso! Você conheceu todas as relíquias desta era. " +
+                        "O rei certamente ficaria impressionado. Retorne ao museu.",
+        comments      = new List<string>
+        {
+            // índice 0 → Pergaminho
+            "Este manuscrito levou meses para ser produzido. Cada letra, uma obra de arte.",
+            // índice 1 → Escudo
+            "Este brasão pertenceu a uma família nobre. Cada símbolo conta uma batalha vencida.",
+            // índice 2 → Espada
+            "Forjada à mão, temperada em fogo e água. Uma espada assim durava gerações.",
+        },
+        spawnOffset = new Vector3(2.2f, 0f, -1.5f),
+    };
+
+    // ── FUTURO TECH ───────────────────────────────────────────────────────
+    static readonly List<ArtifactData> FUTURO_ARTIFACTS = new()
+    {
+        new ArtifactData
+        {
+            goName       = "Artefato_Holograma",
+            artifactName = "Interface Holográfica",
+            subtitle     = "O futuro das interfaces humano-máquina",
+            narration    = "A interface holográfica projeta informações tridimensionais no ar " +
+                           "sem necessidade de superfície física. Utilizando lasers e difração de luz, " +
+                           "cria imagens com profundidade real, manipuláveis com gestos das mãos. " +
+                           "Esta tecnologia elimina a barreira entre mundo digital e físico, " +
+                           "permitindo colaboração imersiva à distância, cirurgias guiadas por projeção " +
+                           "e ambientes de trabalho que se adaptam ao usuário em tempo real.",
+            position  = new Vector3(0f, 0.85f, 0.5f),
+            scale     = new Vector3(0.5f, 0.75f, 0.5f),
+            glowColor = new Color(0f, 0.9f, 1f),
+        },
+        new ArtifactData
+        {
+            goName       = "Artefato_Chip",
+            artifactName = "Processador Quântico",
+            subtitle     = "Computação quântica — além dos limites do silício",
+            narration    = "O processador quântico utiliza qubits que, ao contrário dos bits clássicos, " +
+                           "podem existir em superposição de zero e um simultaneamente. " +
+                           "Isso permite que um computador quântico resolva em segundos " +
+                           "problemas que levariam milhões de anos para processadores convencionais. " +
+                           "Aplicações incluem simulação molecular para descoberta de remédios, " +
+                           "quebra de criptografia avançada e otimização de rotas logísticas globais.",
+            position  = new Vector3(-5f, 1.45f, 3f),
+            scale     = new Vector3(0.2f, 0.03f, 0.2f),
+            glowColor = new Color(0.3f, 0.5f, 1f),
+        },
+        new ArtifactData
+        {
+            goName       = "Artefato_Exo",
+            artifactName = "Exoesqueleto Neural",
+            subtitle     = "A fusão entre humano e máquina",
+            narration    = "O exoesqueleto neural é controlado diretamente por sinais elétricos do cérebro, " +
+                           "capturados por sensores não-invasivos na superfície do crânio. " +
+                           "Permite que pessoas com paralisia voltem a andar, amplifica a força " +
+                           "humana em até dez vezes para uso industrial e militar, " +
+                           "e serve como interface de reabilitação motora para pacientes neurológicos. " +
+                           "Representa a convergência entre neurociência, robótica e inteligência artificial.",
+            position  = new Vector3(5f, 1.2f, -2.5f),
+            scale     = new Vector3(0.35f, 1.1f, 0.2f),
+            glowColor = new Color(0.1f, 1f, 0.5f),
+        },
+    };
+
+    static readonly CompanionConfig FUTURO_CONFIG = new()
+    {
+        sceneName     = "FuturoTechScene",
+        companionName = "ARIA",
+        color         = new Color(0.1f, 0.85f, 1f),
+        introLine     = "Sistemas iniciados. Olá, sou ARIA, sua assistente de IA. " +
+                        "Bem-vindo ao setor Futuro Tecnológico. Aproxime-se dos artefatos para analisá-los.",
+        allDoneLine   = "Análise completa. Todos os artefatos do setor foram processados. " +
+                        "Retorne ao hub central para prosseguir.",
+        comments      = new List<string>
+        {
+            // índice 0 → Holograma
+            "Fascinante. Esta interface elimina completamente a necessidade de telas físicas.",
+            // índice 1 → Chip
+            "Meus processadores são baseados nesta tecnologia. Bilhões de cálculos por nanosegundo.",
+            // índice 2 → Exo
+            "Este modelo amplia a força humana em 10x. A fronteira entre biologia e máquina desaparece.",
+        },
+        spawnOffset = new Vector3(2.2f, 0f, -1.5f),
     };
 
     // ════════════════════════════════════════════════════════════════════
+    // ENTRY POINTS
+    // ════════════════════════════════════════════════════════════════════
+
     [MenuItem("ChronoMundi/🧙 Adicionar Personagem Guia — Todas as Cenas")]
     public static void AddToAllScenes()
     {
-        if (!EditorUtility.DisplayDialog("ChronoMundi — Personagem Guia",
-            "Adiciona um guia único a cada cena histórica:\n\n" +
-            "• Pré-História → Uruk (laranja)\n" +
-            "• Idade Média  → Sir Aldric (dourado)\n" +
-            "• Futuro Tech  → ARIA (ciano)\n\n" +
-            "Cada guia reage aos artefatos com comentários próprios.",
-            "Adicionar", "Cancelar"))
+        if (!EditorUtility.DisplayDialog("ChronoMundi — Personagem Guia v2",
+            "Adiciona guias com artefatos completos e narrações:\n\n" +
+            "• Pré-História → Uruk  (laranja)\n" +
+            "• Idade Média  → Sir Aldric  (dourado)\n" +
+            "• Futuro Tech  → ARIA  (ciano)\n\n" +
+            "Artefatos da IdadeMedia serão criados do zero.\n" +
+            "Artefatos existentes nas outras cenas terão narração atualizada.",
+            "Adicionar tudo", "Cancelar"))
             return;
 
         float p = 0f;
-        foreach (var cfg in CONFIGS)
-        {
-            p += 0.3f;
-            EditorUtility.DisplayProgressBar("ChronoMundi — Guia", $"Adicionando {cfg.companionName}...", p);
-            BuildCompanionInScene(cfg);
-        }
+        Process("Pré-História — Uruk...",    ref p, 0.28f, PREHISTORIA_CONFIG, PREHISTORIA_ARTIFACTS);
+        Process("Idade Média — Sir Aldric...", ref p, 0.56f, IDADEMEDIA_CONFIG,   IDADEMEDIA_ARTIFACTS);
+        Process("Futuro Tech — ARIA...",       ref p, 0.84f, FUTURO_CONFIG,        FUTURO_ARTIFACTS);
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -122,50 +291,162 @@ public static class CompanionBuilder
         EditorUtility.DisplayDialog("ChronoMundi ✅",
             "Personagens guia adicionados!\n\n" +
             "✔ Uruk na PreHistoriaScene\n" +
-            "✔ Sir Aldric na IdadeMediaScene\n" +
+            "✔ Sir Aldric na IdadeMediaScene (artefatos criados)\n" +
             "✔ ARIA na FuturoTechScene\n\n" +
-            "Para adicionar áudio: selecione o guia na cena e\n" +
-            "arraste os AudioClips nos campos do CompanionCharacter.",
-            "OK");
+            "Para adicionar voz: selecione o guia na cena e arraste\n" +
+            "AudioClips nos campos do CompanionCharacter.", "OK");
     }
 
     [MenuItem("ChronoMundi/🧙 Adicionar Personagem Guia — Cena Atual")]
     public static void AddToCurrentScene()
     {
         var scene = EditorSceneManager.GetActiveScene();
-        var cfg   = CONFIGS.Find(c => c.sceneName == scene.name);
+        var (cfg, arts) = scene.name switch
+        {
+            "PreHistoriaScene" => (PREHISTORIA_CONFIG, PREHISTORIA_ARTIFACTS),
+            "IdadeMediaScene"  => (IDADEMEDIA_CONFIG,  IDADEMEDIA_ARTIFACTS),
+            "FuturoTechScene"  => (FUTURO_CONFIG,      FUTURO_ARTIFACTS),
+            _ => ((CompanionConfig)null, null)
+        };
 
         if (cfg == null)
         {
             EditorUtility.DisplayDialog("ChronoMundi",
-                $"Nenhuma configuração de guia para '{scene.name}'.\n" +
-                "O guia só é configurado para cenas históricas.", "OK");
+                $"Nenhuma configuração para '{scene.name}'.", "OK");
             return;
         }
 
-        BuildCompanionInScene(cfg);
+        BuildAll(scene, cfg, arts);
         EditorUtility.DisplayDialog("ChronoMundi ✅",
             $"{cfg.companionName} adicionado a {scene.name}!", "OK");
     }
 
     // ════════════════════════════════════════════════════════════════════
+    // FLUXO PRINCIPAL
+    // ════════════════════════════════════════════════════════════════════
 
-    static void BuildCompanionInScene(EraCompanionConfig cfg)
+    static void Process(string msg, ref float p, float target,
+        CompanionConfig cfg, List<ArtifactData> arts)
     {
-        var scene = EditorSceneManager.OpenScene(
-            SCENES_PATH + cfg.sceneName + ".unity", OpenSceneMode.Single);
+        EditorUtility.DisplayProgressBar("ChronoMundi — Guia", msg, p);
+        var scene = EditorSceneManager.OpenScene(SCENES_PATH + cfg.sceneName + ".unity", OpenSceneMode.Single);
+        BuildAll(scene, cfg, arts);
+        p = target;
+    }
 
-        // Remove guia antigo se existir
+    static void BuildAll(UnityEngine.SceneManagement.Scene scene, CompanionConfig cfg, List<ArtifactData> arts)
+    {
+        // 1. Atualiza / cria artefatos
+        UpdateArtifacts(scene, arts);
+
+        // 2. Constrói o personagem guia
+        BuildCompanion(scene, cfg, arts);
+
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+    }
+
+    // ════════════════════════════════════════════════════════════════════
+    // ARTEFATOS
+    // ════════════════════════════════════════════════════════════════════
+
+    static void UpdateArtifacts(UnityEngine.SceneManagement.Scene scene, List<ArtifactData> arts)
+    {
+        foreach (var art in arts)
+        {
+            // Procura se já existe na cena
+            GameObject existing = null;
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.name == art.goName) { existing = root; break; }
+                var found = System.Array.Find(
+                    root.GetComponentsInChildren<Transform>(true),
+                    t => t.name == art.goName);
+                if (found != null) { existing = found.gameObject; break; }
+            }
+
+            if (existing != null)
+            {
+                // Só atualiza narração e dados do InteracleObject
+                var io = existing.GetComponent<InteracleObject>();
+                if (io != null)
+                {
+                    io.artifactName        = art.artifactName;
+                    io.artifactDescription = art.narration;
+                    io.subtitleText        = art.subtitle;
+                    EditorUtility.SetDirty(existing);
+                }
+                Debug.Log($"[CompanionBuilder] Narração atualizada: {art.goName}");
+            }
+            else
+            {
+                // Cria do zero (caso da IdadeMedia)
+                CreateArtifact(scene, art);
+                Debug.Log($"[CompanionBuilder] Artefato criado: {art.goName}");
+            }
+        }
+    }
+
+    static void CreateArtifact(UnityEngine.SceneManagement.Scene scene, ArtifactData art)
+    {
+        var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        go.name = art.goName;
+        SceneManager.MoveGameObjectToScene(go, scene);
+        go.transform.position   = art.position;
+        go.transform.localScale = art.scale;
+
+        int layer = LayerMask.NameToLayer("Interactable");
+        if (layer >= 0) go.layer = layer;
+
+        // Material
+        var mat = AssetDatabase.LoadAssetAtPath<Material>(MAT_PATH + "Artifact_Metal.mat");
+        if (mat != null) go.GetComponent<Renderer>().sharedMaterial = mat;
+
+        var io = go.AddComponent<InteracleObject>();
+        io.artifactName        = art.artifactName;
+        io.artifactDescription = art.narration;
+        io.subtitleText        = art.subtitle;
+        io.interactOnlyOnce    = true;
+
+        var hc = go.AddComponent<HighlightController>();
+        hc.emissionColor  = art.glowColor;
+        hc.pulseSpeed     = 2f;
+        hc.minIntensity   = 0.05f;
+        hc.maxIntensity   = 1.8f;
+        hc.stopOnInteract = true;
+
+        // Pedestal
+        var ped = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        ped.name = art.goName + "_Pedestal";
+        SceneManager.MoveGameObjectToScene(ped, scene);
+        ped.transform.position   = art.position + new Vector3(0, -art.scale.y * 0.5f - 0.35f, 0);
+        ped.transform.localScale = new Vector3(0.4f, 0.32f, 0.4f);
+        Object.DestroyImmediate(ped.GetComponent<Collider>());
+
+        // Label WorldSpace acima do artefato
+        AddWorldLabel(go, art.artifactName,
+            new Vector3(0, art.scale.y * 0.5f + 0.3f, 0));
+
+        EditorUtility.SetDirty(go);
+    }
+
+    // ════════════════════════════════════════════════════════════════════
+    // PERSONAGEM GUIA
+    // ════════════════════════════════════════════════════════════════════
+
+    static void BuildCompanion(UnityEngine.SceneManagement.Scene scene,
+        CompanionConfig cfg, List<ArtifactData> arts)
+    {
+        // Remove antigo
         foreach (var go in scene.GetRootGameObjects())
             if (go.name == "Companion_" + cfg.companionName)
                 Object.DestroyImmediate(go);
 
-        // ── Raiz do Guia ──────────────────────────────────────────────────
         var root = new GameObject("Companion_" + cfg.companionName);
         SceneManager.MoveGameObjectToScene(root, scene);
         root.transform.position = GetPlayerSpawn(cfg.sceneName) + cfg.spawnOffset;
 
-        // ── Corpo (cápsula) ───────────────────────────────────────────────
+        // ── Corpo ─────────────────────────────────────────────────────────
         var body = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         body.name = "Body";
         body.transform.SetParent(root.transform, false);
@@ -173,19 +454,8 @@ public static class CompanionBuilder
         body.transform.localScale    = new Vector3(0.45f, 0.55f, 0.45f);
         Object.DestroyImmediate(body.GetComponent<Collider>());
 
-        // Material com cor da era
-        var mat = new Material(Shader.Find("Universal Render Pipeline/Lit") ??
-                               Shader.Find("Standard"));
-        mat.color = cfg.color;
-        mat.EnableKeyword("_EMISSION");
-        mat.SetColor("_EmissionColor", cfg.color * 0.5f);
+        var mat = CreateCompanionMaterial(cfg);
         body.GetComponent<Renderer>().sharedMaterial = mat;
-
-        // Salva material
-        string matDir  = "Assets/Projeto/Assets/Materials/Companions/";
-        EnsureDirectory(matDir);
-        string matPath = matDir + cfg.companionName + "_Mat.mat";
-        AssetDatabase.CreateAsset(mat, matPath);
 
         // ── Cabeça ────────────────────────────────────────────────────────
         var head = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -196,15 +466,22 @@ public static class CompanionBuilder
         Object.DestroyImmediate(head.GetComponent<Collider>());
         head.GetComponent<Renderer>().sharedMaterial = mat;
 
-        // ── Olhos (visuais) ───────────────────────────────────────────────
+        // ── Olhos ─────────────────────────────────────────────────────────
         AddEye(head, new Vector3(-0.12f, 0.06f, 0.35f));
         AddEye(head, new Vector3( 0.12f, 0.06f, 0.35f));
 
-        // ── Aura de partículas (esfera de luz pulsante) ───────────────────
+        // ── Aura ──────────────────────────────────────────────────────────
         AddAura(root, cfg.color);
 
-        // ── Name Tag ──────────────────────────────────────────────────────
+        // ── Name Tag (CORRIGIDO: rotação 180° em Y para ficar legível) ────
         var nameTag = BuildNameTag(root, cfg.companionName, cfg.color);
+
+        // ── AudioSource ───────────────────────────────────────────────────
+        var audio = root.AddComponent<AudioSource>();
+        audio.spatialBlend = 0.6f;
+        audio.minDistance  = 2f;
+        audio.maxDistance  = 15f;
+        audio.volume       = 0.85f;
 
         // ── CompanionCharacter ────────────────────────────────────────────
         var companion = root.AddComponent<CompanionCharacter>();
@@ -219,21 +496,36 @@ public static class CompanionBuilder
         companion.moveSpeed       = 4f;
         companion.side            = 1f;
 
-        // ── AudioSource ───────────────────────────────────────────────────
-        var audio = root.AddComponent<AudioSource>();
-        audio.spatialBlend = 0.6f; // semi-3D
-        audio.minDistance  = 2f;
-        audio.maxDistance  = 15f;
-        audio.volume       = 0.85f;
-
         EditorUtility.SetDirty(root);
-        EditorSceneManager.MarkSceneDirty(scene);
-        EditorSceneManager.SaveScene(scene);
-
-        Debug.Log($"[CompanionBuilder] {cfg.companionName} adicionado à {cfg.sceneName}.");
+        Debug.Log($"[CompanionBuilder] {cfg.companionName} criado em {cfg.sceneName}.");
     }
 
-    // ── Helpers visuais ───────────────────────────────────────────────────
+    // ════════════════════════════════════════════════════════════════════
+    // HELPERS VISUAIS
+    // ════════════════════════════════════════════════════════════════════
+
+    static Material CreateCompanionMaterial(CompanionConfig cfg)
+    {
+        string dir  = "Assets/Projeto/Assets/Materials/Companions/";
+        string path = dir + cfg.companionName + "_Mat.mat";
+        EnsureDirectory(dir);
+
+        var existing = AssetDatabase.LoadAssetAtPath<Material>(path);
+        if (existing != null)
+        {
+            existing.color = cfg.color;
+            existing.SetColor("_EmissionColor", cfg.color * 0.5f);
+            return existing;
+        }
+
+        var mat = new Material(Shader.Find("Universal Render Pipeline/Lit") ??
+                               Shader.Find("Standard"));
+        mat.color = cfg.color;
+        mat.EnableKeyword("_EMISSION");
+        mat.SetColor("_EmissionColor", cfg.color * 0.5f);
+        AssetDatabase.CreateAsset(mat, path);
+        return mat;
+    }
 
     static void AddEye(GameObject head, Vector3 localPos)
     {
@@ -256,13 +548,13 @@ public static class CompanionBuilder
         aura.transform.SetParent(root.transform, false);
         aura.transform.localPosition = new Vector3(0, 0.5f, 0);
 
-        var ps = aura.AddComponent<ParticleSystem>();
+        var ps   = aura.AddComponent<ParticleSystem>();
         var main = ps.main;
-        main.startColor     = new ParticleSystem.MinMaxGradient(color * 0.8f, color);
-        main.startSize      = new ParticleSystem.MinMaxCurve(0.04f, 0.12f);
-        main.startLifetime  = new ParticleSystem.MinMaxCurve(1f, 2f);
-        main.startSpeed     = new ParticleSystem.MinMaxCurve(0.1f, 0.3f);
-        main.maxParticles   = 30;
+        main.startColor      = new ParticleSystem.MinMaxGradient(color * 0.7f, color);
+        main.startSize       = new ParticleSystem.MinMaxCurve(0.04f, 0.12f);
+        main.startLifetime   = new ParticleSystem.MinMaxCurve(1f, 2f);
+        main.startSpeed      = new ParticleSystem.MinMaxCurve(0.08f, 0.25f);
+        main.maxParticles    = 30;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
 
         var emission = ps.emission;
@@ -273,11 +565,21 @@ public static class CompanionBuilder
         shape.radius    = 0.35f;
     }
 
+    /// <summary>
+    /// Constrói o name tag em WorldSpace.
+    /// CORREÇÃO: rotaciona 180° em Y para que o texto fique legível
+    /// quando o guia está de frente para o jogador (que fica atrás do guia).
+    /// O FacePlayer() do CompanionCharacter faz o guia olhar para o jogador,
+    /// então o forward do guia aponta PARA o jogador — sem a rotação o texto
+    /// fica do lado errado. Com 180° em Y, o texto aponta para o jogador.
+    /// </summary>
     static TextMeshProUGUI BuildNameTag(GameObject root, string name, Color color)
     {
         var tagGO = new GameObject("NameTag");
         tagGO.transform.SetParent(root.transform, false);
         tagGO.transform.localPosition = new Vector3(0, 1.45f, 0);
+        // CORREÇÃO DO BUG: 180° em Y para o texto não aparecer espelhado/invertido
+        tagGO.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
         tagGO.transform.localScale    = Vector3.one * 0.01f;
 
         var canvas = tagGO.AddComponent<Canvas>();
@@ -285,11 +587,11 @@ public static class CompanionBuilder
         tagGO.AddComponent<UnityEngine.UI.CanvasScaler>();
 
         var tmp = tagGO.AddComponent<TextMeshProUGUI>();
-        tmp.text      = name;
-        tmp.fontSize  = 52;
-        tmp.color     = color;
-        tmp.fontStyle = TMPro.FontStyles.Bold;
-        tmp.alignment = TMPro.TextAlignmentOptions.Center;
+        tmp.text         = name;
+        tmp.fontSize     = 52;
+        tmp.color        = color;
+        tmp.fontStyle    = FontStyles.Bold;
+        tmp.alignment    = TextAlignmentOptions.Center;
         tmp.outlineWidth = 0.2f;
         tmp.outlineColor = Color.black;
 
@@ -299,7 +601,34 @@ public static class CompanionBuilder
         return tmp;
     }
 
-    // ── Utils ─────────────────────────────────────────────────────────────
+    static void AddWorldLabel(GameObject parent, string text, Vector3 localPos,
+        float fontSize = 40, Color? color = null)
+    {
+        var go = new GameObject("Label");
+        go.transform.SetParent(parent.transform, false);
+        go.transform.localPosition = localPos;
+        // Mesma correção: 180° para labels dos artefatos ficarem legíveis
+        go.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+        go.transform.localScale    = Vector3.one * 0.012f;
+
+        var canvas = go.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+        go.AddComponent<UnityEngine.UI.CanvasScaler>();
+
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.text      = text;
+        tmp.fontSize  = fontSize;
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color     = color ?? Color.white;
+        tmp.fontStyle = FontStyles.Bold;
+
+        var rt = go.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(500, 120);
+    }
+
+    // ════════════════════════════════════════════════════════════════════
+    // UTILS
+    // ════════════════════════════════════════════════════════════════════
 
     static Vector3 GetPlayerSpawn(string sceneName) => sceneName switch
     {
@@ -311,17 +640,14 @@ public static class CompanionBuilder
 
     static void EnsureDirectory(string path)
     {
-        if (!UnityEditor.AssetDatabase.IsValidFolder(path.TrimEnd('/')))
+        var parts = path.TrimEnd('/').Split('/');
+        string current = parts[0];
+        for (int i = 1; i < parts.Length; i++)
         {
-            var parts = path.TrimEnd('/').Split('/');
-            string current = parts[0];
-            for (int i = 1; i < parts.Length; i++)
-            {
-                string next = current + "/" + parts[i];
-                if (!AssetDatabase.IsValidFolder(next))
-                    AssetDatabase.CreateFolder(current, parts[i]);
-                current = next;
-            }
+            string next = current + "/" + parts[i];
+            if (!AssetDatabase.IsValidFolder(next))
+                AssetDatabase.CreateFolder(current, parts[i]);
+            current = next;
         }
     }
 }

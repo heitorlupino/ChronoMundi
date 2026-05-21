@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Osso_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Osso_PreHistoria
+  era: 0
+  subtitleText: "Os primeiros n\xFAmeros da humanidade \u2014 25.000 anos"
+  artifactName: Osso Numerado
+  artifactDescription: "O Osso de Ishango, encontrado no atual Congo e datado de
+    aproximadamente 25.000 anos, \xE9 considerado por muitos pesquisadores o primeiro
+    artefato matem\xE1tico da hist\xF3ria.\n\nSuas marcas entalhadas em grupos regulares
+    podem representar contagens de ciclos lunares ou sequ\xEAncias num\xE9ricas com
+    padr\xE3o intencional \u2014 evid\xEAncia de pensamento abstrato.\n\nEste osso
+    demonstra que a capacidade de abstra\xE7\xE3o matem\xE1tica surgiu muito antes
+    da escrita, das cidades ou de qualquer civiliza\xE7\xE3o formal. A matem\xE1tica
+    n\xE3o foi inventada \u2014 foi descoberta por mentes que j\xE1 enxergavam padr\xF5es
+    no mundo natural."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

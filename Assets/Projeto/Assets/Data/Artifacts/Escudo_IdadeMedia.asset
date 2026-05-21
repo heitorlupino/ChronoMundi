@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Escudo_IdadeMedia
+  m_EditorClassIdentifier: 
+  artifactID: Escudo_IdadeMedia
+  era: 1
+  subtitleText: "Bras\xE3o de fam\xEDlia nobre \u2014 identidade e honra em metal"
+  artifactName: "Escudo Her\xE1ldico"
+  artifactDescription: "Os bras\xF5es her\xE1ldicos funcionavam como identidades
+    visuais das fam\xEDlias nobres medievais \u2014 um sistema de reconhecimento
+    visual indispens\xE1vel em tempos de batalha, quando rostos ficavam ocultos por
+    capacetes de metal.\n\nCada elemento era codificado com precis\xE3o: o vermelho
+    (goles) simbolizava coragem e ousadia; o dourado (ouro), nobreza e generosidade;
+    o le\xE3o, for\xE7a e bravura em combate. A combina\xE7\xE3o era \xFAnica para
+    cada linhagem e protegida por lei.\n\nO escudo era passado de pai para filho
+    como rel\xEDquia sagrada. Perder ou manchar o bras\xE3o da fam\xEDlia era considerado
+    a maior desonra que um cavaleiro poderia sofrer."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

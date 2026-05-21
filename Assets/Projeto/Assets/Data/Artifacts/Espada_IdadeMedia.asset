@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Espada_IdadeMedia
+  m_EditorClassIdentifier: 
+  artifactID: Espada_IdadeMedia
+  era: 1
+  subtitleText: "A l\xE2mina do cavaleiro \u2014 s\xEDmbolo de honra e poder medieval"
+  artifactName: Espada de Cavaleiro
+  artifactDescription: "A espada de cavaleiro era muito mais do que uma arma: era
+    o s\xEDmbolo m\xE1ximo do c\xF3digo da cavalaria e do compromisso do guerreiro
+    com honra, prote\xE7\xE3o e lealdade.\n\nForjada por ferreiros especializados
+    ao longo de semanas, o a\xE7o era dobrado e martelado centenas de vezes para
+    equilibrar dureza e flexibilidade. A guarda em cruz n\xE3o era apenas funcional
+    \u2014 carregava simbolismo crist\xE3o profundo.\n\nCavaleiros recebiam suas
+    espadas em cerim\xF4nias formais de investidura, muitas vezes com nomes pr\xF3prios
+    \u2014 como Excalibur ou Durandal. Eram transmitidas por gera\xE7\xF5es como
+    s\xEDmbolo da continuidade da linhagem e de sua honra imortal."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 

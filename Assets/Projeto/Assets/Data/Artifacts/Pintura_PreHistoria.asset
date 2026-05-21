@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Pintura_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Pintura_PreHistoria
+  era: 0
+  subtitleText: "Arte nas pedras \u2014 os primeiros registros da humanidade"
+  artifactName: Pintura Rupestre
+  artifactDescription: "As pinturas rupestres s\xE3o express\xF5es art\xEDsticas
+    feitas com pigmentos minerais como ocre vermelho, carv\xE3o e mangan\xEAs nas
+    paredes de cavernas. As mais antigas t\xEAm mais de 40.000 anos \u2014 anteriores
+    \xE0 chegada do ser humano moderno na Europa.\n\nRepresentam animais em movimento,
+    ca\xE7adas, m\xE3os em negativo e s\xEDmbolos geom\xE9tricos. Mais do que simples
+    decora\xE7\xE3o, eram possivelmente registros sagrados, mapas de ca\xE7a ou formas
+    de comunica\xE7\xE3o ritual entre membros do grupo.\n\nS\xE3o o primeiro sistema
+    de comunica\xE7\xE3o visual da humanidade \u2014 a origem de toda escrita, de
+    toda arte e de toda transmiss\xE3o cultural registrada."
+  narrationClip: {fileID: 0}
+  textAuthor: ChronoMundi
+  lastRevision: 2025-05
+  devNotes: 
