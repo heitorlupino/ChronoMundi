@@ -1,0 +1,8 @@
+# Gerado pelo ChronoMundi GradleBuildFixer
+org.gradle.jvmargs=-Xmx4096m
+org.gradle.parallel=true
+android.useAndroidX=true
+android.enableJetifier=true
+# Suprime warning do compileSdk > 33 com Gradle plugin 7.4.2
+android.suppressUnsupportedCompileSdk=36
+**ADDITIONAL_PROPERTIES**

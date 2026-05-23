@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.google.xr.cardboard": {
+      "version": "1.22.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "3.2.9",
+        "com.unity.xr.legacyinputhelpers": "2.1.4"
+      },
+      "url": "https://package.openupm.com"
+    },
     "com.unity.burst": {
       "version": "1.8.21",
       "depth": 1,

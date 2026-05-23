@@ -1,0 +1,59 @@
+// Gerado pelo ChronoMundi GradleBuildFixer
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation project(':unityLibrary')
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
+
+android {
+	namespace "**NAMESPACE**"
+	ndkPath "**NDKPATH**"
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        applicationId '**APPLICATIONID**'
+        minSdkVersion **MINSDKVERSION**
+        targetSdkVersion **TARGETSDKVERSION**
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {
+        ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb'] + unityStreamingAssets.tokenize(', ')
+    }
+
+    **SIGNING_CONFIG**
+
+    buildTypes {
+        debug {
+            minifyEnabled **MINIFY_DEBUG**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            **SIGNCONFIG**
+        }
+        release {
+            minifyEnabled **MINIFY_RELEASE**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            **SIGNCONFIG**
+        }
+    }
+
+    **BUILT_APK_LOCATION**
+
+    bundle {
+        language { enableSplit = false }
+        density  { enableSplit = false }
+        abi      { enableSplit = true  }
+    }
+}
