@@ -308,17 +308,17 @@ public static class CardboardSetup
         fillRT.sizeDelta = new Vector2(36f, 36f);
         fillRT.anchoredPosition = Vector2.zero;
 
-        // Texto de dica (opcional — "Olhe para interagir")
+        // Texto de dica menor e mais discreto
         var hint = new GameObject("GazeHint");
         hint.transform.SetParent(anchor.transform, false);
         var hintTMP = hint.AddComponent<TextMeshProUGUI>();
         hintTMP.text      = "Olhe para interagir";
-        hintTMP.fontSize  = 18;
-        hintTMP.color     = new Color(1f, 1f, 1f, 0.7f);
+        hintTMP.fontSize  = 13;
+        hintTMP.color     = new Color(1f, 1f, 1f, 0.45f);
         hintTMP.alignment = TextAlignmentOptions.Center;
         var hintRT = hint.GetComponent<RectTransform>();
-        hintRT.sizeDelta        = new Vector2(280f, 40f);
-        hintRT.anchoredPosition = new Vector2(0f, -36f);
+        hintRT.sizeDelta        = new Vector2(180f, 24f);
+        hintRT.anchoredPosition = new Vector2(0f, -28f);
 
         // Começa desativado — ativa quando há alvo
         fill.SetActive(true);

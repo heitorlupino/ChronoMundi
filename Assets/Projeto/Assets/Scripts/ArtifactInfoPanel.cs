@@ -4,15 +4,9 @@ using TMPro;
 using UnityEngine.UI;
 
 /// <summary>
-/// Painel de informa��es do artefato.
-/// Exibe nome e descri��o quando o jogador interage com um InteracleObject.
-/// Persiste entre cenas junto com o NarratorSystem.
-///
-/// Como usar no Inspector:
-///   1. Crie um Canvas (Screen Space � Overlay) com DontDestroyOnLoad.
-///   2. Adicione um painel com: t�tulo (TMP), descri��o (TMP), bot�o fechar.
-///   3. Arraste os campos abaixo no Inspector.
-///   4. O painel abre automaticamente ao interagir; fecha pelo bot�o ou pelo timer.
+/// Painel de informações do artefato.
+/// Abre ao interagir com um InteracleObject.
+/// Fecha pressionando [F] (ou o botão, se existir).
 /// </summary>
 public class ArtifactInfoPanel : MonoBehaviour
 {
@@ -25,20 +19,25 @@ public class ArtifactInfoPanel : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
 
-    [Header("Bot�o Fechar")]
+    [Header("Fechar com tecla")]
+    public KeyCode closeKey = KeyCode.F;
+
+    [Header("Botão Fechar (opcional)")]
     public Button closeButton;
 
     [Header("Auto-fechar")]
-    [Tooltip("0 = n�o fecha automaticamente")]
-    public float autoCloseDuration = 8f;
+    [Tooltip("0 = não fecha automaticamente")]
+    public float autoCloseDuration = 0f;
 
-    [Header("Anima��o (opcional)")]
+    [Header("Animação (opcional)")]
     public Animator panelAnimator;
-    public string openTrigger = "Open";
+    public string openTrigger  = "Open";
     public string closeTrigger = "Close";
 
-    // ??????????????????????????????????????????????????????????????????????
     private Coroutine _autoCloseCoroutine;
+    private bool      _isOpen = false;
+
+    // ─────────────────────────────────────────────────────────────────────
 
     void Awake()
     {
@@ -62,24 +61,29 @@ public class ArtifactInfoPanel : MonoBehaviour
         if (closeButton != null) closeButton.onClick.RemoveListener(Hide);
     }
 
-    // ?? API p�blica ????????????????????????????????????????????????????????
+    void Update()
+    {
+        // Fecha com [F] quando o painel estiver aberto
+        if (_isOpen && Input.GetKeyDown(closeKey))
+            Hide();
+    }
 
-    /// <summary>Mostra o painel com nome e descri��o do artefato.</summary>
+    // ── API pública ───────────────────────────────────────────────────────
+
     public void Show(string name, string description)
     {
-        // Sem conte�do relevante: n�o abre o painel
         if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(description))
             return;
 
-        if (titleText != null) titleText.text = name;
+        if (titleText       != null) titleText.text       = name;
         if (descriptionText != null) descriptionText.text = description;
 
         if (panel != null) panel.SetActive(true);
+        _isOpen = true;
 
         if (panelAnimator != null)
             panelAnimator.SetTrigger(openTrigger);
 
-        // Auto-fechar
         if (_autoCloseCoroutine != null) StopCoroutine(_autoCloseCoroutine);
         if (autoCloseDuration > 0f)
             _autoCloseCoroutine = StartCoroutine(AutoClose());
@@ -93,6 +97,8 @@ public class ArtifactInfoPanel : MonoBehaviour
             _autoCloseCoroutine = null;
         }
 
+        _isOpen = false;
+
         if (panelAnimator != null)
         {
             panelAnimator.SetTrigger(closeTrigger);
@@ -104,7 +110,8 @@ public class ArtifactInfoPanel : MonoBehaviour
         }
     }
 
-    // ??????????????????????????????????????????????????????????????????????
+    // ─────────────────────────────────────────────────────────────────────
+
     IEnumerator AutoClose()
     {
         yield return new WaitForSeconds(autoCloseDuration);
@@ -113,12 +120,10 @@ public class ArtifactInfoPanel : MonoBehaviour
 
     IEnumerator DisableAfterAnimation()
     {
-        // Espera a anima��o de fechar terminar (1 frame + dura��o da clip)
         yield return null;
         if (panelAnimator != null)
             yield return new WaitForSeconds(
                 panelAnimator.GetCurrentAnimatorStateInfo(0).length);
-
         if (panel != null) panel.SetActive(false);
     }
 }
