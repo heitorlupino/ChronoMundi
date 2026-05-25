@@ -41,16 +41,11 @@ public class ArtifactInfoPanel : MonoBehaviour
 
     void Awake()
     {
+        // Sem DontDestroyOnLoad — cada cena tem seu próprio painel
         if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
         else
-        {
             Destroy(gameObject);
-            return;
-        }
 
         if (panel != null) panel.SetActive(false);
         if (closeButton != null) closeButton.onClick.AddListener(Hide);

@@ -5,6 +5,7 @@ Um projeto Unity para um museu virtual imersivo, explorando eras históricas atr
 ## Funcionalidades
 - **Navegação por Eras**: Portais no hub levam a ambientes temáticos.
 - **Interação com Artefatos**: Pressione E para interagir e ouvir narrações.
+- **Interação com Artefatos**: Pressione E para interagir e ouvir narrações. Ao interagir, abre um painel de informações do artefato com título e descrição; feche com a tecla `F` ou com o botão de fechar (opcional). O painel suporta auto-fechar (campo `autoCloseDuration`) e animações configuráveis via `Animator` (gatilhos `openTrigger`/`closeTrigger`, padrões: `Open`/`Close`).
 - **Sistema de Progresso**: Complete explorações para desbloquear saídas (UI com ícone dourado).
 - **Narrador Inteligente**: Áudio e legendas contextuais.
 - **UI Polida**: Menus com gradientes, botões sem warnings de fonte, pause menu aprimorado.
@@ -46,6 +47,7 @@ Um projeto Unity para um museu virtual imersivo, explorando eras históricas atr
 2. Clique "JOGAR" para ir ao hub.
 3. Entre nos portais das eras.
 4. Explore artefatos (pressione E).
+   - Ao interagir com um artefato, um painel exibirá título e descrição; feche com `F` ou o botão de fechar. O comportamento de auto-fechar e animações pode ser configurado no Inspector (`autoCloseDuration`, `panelAnimator`).
 5. Complete todos para ativar a saída brilhante.
 6. Retorne ao hub e repita.
 
@@ -55,6 +57,7 @@ Um projeto Unity para um museu virtual imersivo, explorando eras históricas atr
   - `ChronomundiSceneBuilder.cs`: Configura cenas completas.
   - `PlayerInteraction.cs`: Gerencia interações.
   - `NarratorSystem.cs`: Narração.
+   - `ArtifactInfoPanel.cs`: Gerencia o painel de informações de artefatos. Expõe `Show(string name, string description)` e `Hide()`, campo `closeKey` (padrão `F`), `autoCloseDuration`, `closeButton` (opcional) e `panelAnimator` com gatilhos configuráveis.
 - **Menus Unity**:
   - **🎨 Popular Assets + Construir Ambientes**: Recria materiais/ambientes.
   - **🏗️ Construir Cenas Completas**: Reconfigura cenas.
