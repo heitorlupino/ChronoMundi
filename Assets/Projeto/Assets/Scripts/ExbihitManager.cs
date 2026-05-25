@@ -103,7 +103,15 @@ public class ExhibitManager : MonoBehaviour
             progressText.text = $"{current} / {total} artefatos explorados";
 
         if (progressBar != null)
-            progressBar.value = total > 0 ? (float)current / total : 0f;
+        {
+            float newValue = total > 0 ? (float)current / total : 0f;
+            progressBar.value = newValue;
+            Debug.Log($"[ExhibitManager] Progresso: {current}/{total} = {newValue:P0} | Slider.value={progressBar.value}");
+        }
+        else
+        {
+            Debug.LogWarning("[ExhibitManager] progressBar é NULL!");
+        }
     }
 
     void CheckCompletion()
