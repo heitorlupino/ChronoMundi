@@ -2983,8 +2983,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante"
-  artifactData: {fileID: 11400000, guid: 1b912ee2dd904ce40bbb201790d40a1b, type: 2}
+  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante\n\nOs
+    velociraptors foram dinossauros carn\xEDvoros que viveram durante o per\xEDodo
+    Cret\xE1ceo, h\xE1 aproximadamente 75 milh\xF5es de anos. Apesar de serem frequentemente
+    retratados como grandes e extremamente assustadores nos filmes, os velociraptors
+    reais eram menores do que muitas pessoas imaginam, medindo cerca de 2 metros
+    de comprimento e aproximadamente 50 cent\xEDmetros de altura."
   artifactName: Esqueleto de Triceratops
   artifactDescription: "O esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas
     mais impressionantes j\xE1 descobertas, com seus tr\xEAs chifres imponentes e
@@ -6171,8 +6175,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
   subtitleText: "Cabe\xE7a de Pedra: O Mist\xE9rio por Tr\xE1s do Cr\xE2nio mais
-    Duro da Pr\xE9-Hist\xF3ria"
-  artifactData: {fileID: 0}
+    Duro da Pr\xE9-Hist\xF3ria\n\nO paquicefalossauro era um dinossauro herb\xEDvoro
+    conhecido pelo seu cr\xE2nio extremamente espesso, que podia chegar a 25 cent\xEDmetros
+    de espessura, usado provavelmente em disputas territoriais entre machos. Viveu
+    no final do Cret\xE1ceo, h\xE1 cerca de 70 milh\xF5es de anos, e se locomovia
+    em duas patas pelas florestas e plan\xEDcies da Am\xE9rica do Norte. \n\nApesar
+    de seu aspecto intimidador, era um animal de m\xE9dio porte, e seu cr\xE2nio
+    abobadado permanece at\xE9 hoje um dos tra\xE7os mais fascinantes e debatidos
+    da paleontologia.\n"
   artifactName: Paquicefalossauro
   artifactDescription: "O paquicefalossauro era um dinossauro herb\xEDvoro conhecido
     pelo seu cr\xE2nio extremamente espesso, que podia chegar a 25 cent\xEDmetros
@@ -6676,7 +6686,7 @@ GameObject:
   - component: {fileID: 706996071}
   - component: {fileID: 706996070}
   m_Layer: 0
-  m_Name: Velociraptores (1)
+  m_Name: Triceratops
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6826,8 +6836,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante"
-  artifactData: {fileID: 0}
+  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante\n\nO
+    esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas mais impressionantes
+    j\xE1 descobertas, com seus tr\xEAs chifres imponentes e a enorme gola \xF3ssea
+    que protegia seu pesco\xE7o podendo atingir at\xE9 9 metros de comprimento no
+    total. Cada osso preservado conta uma hist\xF3ria de batalhas, sobreviv\xEAncia
+    e adapta\xE7\xE3o em um mundo dominado por predadores como o Tiranossauro Rex,
+    seu maior advers\xE1rio. \n\nEstudar seus f\xF3sseis permite aos paleont\xF3logos
+    entender n\xE3o apenas sua anatomia, mas tamb\xE9m seu comportamento social e
+    os \xFAltimos dias da era dos dinossauros."
   artifactName: Esqueleto de Triceratops
   artifactDescription: "O esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas
     mais impressionantes j\xE1 descobertas, com seus tr\xEAs chifres imponentes e
@@ -10381,7 +10398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
   subtitleText: "Chamas da Origem: A Fogueira que Mudou a Hist\xF3ria da Humanidade"
-  artifactData: {fileID: 0}
   artifactName: Fogueira
   artifactDescription: "A fogueira dos homens das cavernas representa um dos maiores
     marcos da evolu\xE7\xE3o humana, sendo o primeiro dom\xEDnio consciente de uma

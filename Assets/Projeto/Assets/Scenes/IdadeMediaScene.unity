@@ -2154,7 +2154,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "Entre a Guerra e a Honra: O Escudo como S\xEDmbolo da Idade M\xE9dia"
+  subtitleText: "Entre a Guerra e a Honra: O Escudo como S\xEDmbolo da Idade M\xE9dia\n\nO
+    escudo medieval era um item essencial tanto na batalha quanto na identidade do
+    guerreiro, feito de madeira refor\xE7ada com couro e metal para suportar golpes
+    poderosos. Sua forma evoluiu ao longo dos s\xE9culos, adaptando-se \xE0s novas
+    t\xE9cnicas de combate e armaduras da \xE9poca. \n\nAl\xE9m de sua fun\xE7\xE3o
+    protetora, tornou-se s\xEDmbolo de honra e identidade, carregando bras\xF5es
+    e cores que representavam fam\xEDlias, cavaleiros e reinos inteiros.\n\nO escudo
+    era passado de pai para filho como rel\xEDquia sagrada. Perder ou manchar o bras\xE3o
+    da fam\xEDlia era considerado a maior desonra que um cavaleiro poderia sofrer."
   artifactName: Escudo Medieval
   artifactDescription: "O escudo medieval era um item essencial tanto na batalha
     quanto na identidade do guerreiro, feito de madeira refor\xE7ada com couro e
@@ -13460,7 +13468,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "A\xE7o e Gl\xF3ria: A Espada como Alma do Cavaleiro Medieval"
+  subtitleText: "A\xE7o e Gl\xF3ria: A Espada como Alma do Cavaleiro Medieval\n\nA
+    espada medieval era muito mais do que uma arma \u2014 era um s\xEDmbolo de poder,
+    f\xE9 e honra, forjada \xE0 m\xE3o por habilidosos ferreiros que aqueciam e martelavam
+    o a\xE7o por dias at\xE9 obter uma l\xE2mina resistente e afiada. "
   artifactName: Espada do Cavaleiro Medieval
   artifactDescription: "A espada medieval era muito mais do que uma arma \u2014 era
     um s\xEDmbolo de poder, f\xE9 e honra, forjada \xE0 m\xE3o por habilidosos ferreiros
@@ -17312,9 +17323,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: 'Festim dos Reis: Os Sabores e Rituais de um Jantar Medieval
-
-'
+  subtitleText: "Festim dos Reis: Os Sabores e Rituais de um Jantar Medieval\n\nAs
+    mesas medievais eram fartas e repletas de carnes assadas, p\xE3es r\xFAsticos,
+    sopas temperadas com ervas e especiarias vindas do Oriente, acompanhadas de frutas,
+    queijos e doces \xE0 base de mel. As bebidas mais comuns eram o vinho, a cerveja
+    e o hidromel, servidos em ta\xE7as de madeira, estanho ou prata dependendo da
+    nobreza dos convidados. Mais do que alimentar, o jantar medieval era um ritual
+    social de poder e prest\xEDgio, onde a posi\xE7\xE3o na mesa e a abund\xE2ncia
+    dos pratos revelavam a riqueza e o status de quem presidia o festim.\n\nCada
+    p\xE1gina podia levar semanas de trabalho: as letras capitais eram adornadas
+    com folha de ouro genu\xEDna, pigmentos raros como l\xE1pis-laz\xFAli trazido
+    do Afeganist\xE3o e ilustra\xE7\xF5es microsc\xF3picas com bordas de criaturas
+    fant\xE1sticas."
   artifactName: Jantar Medieval
   artifactDescription: "As mesas medievais eram fartas e repletas de carnes assadas,
     p\xE3es r\xFAsticos, sopas temperadas com ervas e especiarias vindas do Oriente,
@@ -17659,7 +17679,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "Ferro e F\xE9: A Armadura como Segunda Pele do Guerreiro Medieval"
+  subtitleText: "Ferro e F\xE9: A Armadura como Segunda Pele do Guerreiro Medieval\n\nA
+    armadura medieval foi uma das cria\xE7\xF5es mais sofisticadas da \xE9poca, evoluindo
+    das simples camisas de malha de ferro (cota de malha) dos s\xE9culos iniciais
+    at\xE9 as imponentes armaduras de placas completas do s\xE9culo XV, capazes de
+    cobrir o corpo inteiro com pe\xE7as articuladas de a\xE7o forjado. \n\nCada pe\xE7a
+    era cuidadosamente moldada por ferreiros especializados, levando meses para ser
+    conclu\xEDda, tornando-a um item de alt\xEDssimo valor acess\xEDvel apenas \xE0
+    nobreza e aos cavaleiros mais abastados. "
   artifactName: Armadura Medieval
   artifactDescription: "A armadura medieval foi uma das cria\xE7\xF5es mais sofisticadas
     da \xE9poca, evoluindo das simples camisas de malha de ferro (cota de malha)
