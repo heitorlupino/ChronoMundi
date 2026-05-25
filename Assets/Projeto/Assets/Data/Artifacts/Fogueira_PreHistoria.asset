@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Fogueira_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Fogueira_PreHistoria
+  era: 0
+  subtitleText: "Chamas da Origem: A Fogueira que Mudou a Hist\xF3ria da Humanidade"
+  artifactName: Fogueira
+  artifactDescription: "A fogueira dos homens das cavernas representa um dos maiores
+    marcos da evolu\xE7\xE3o humana, sendo o primeiro dom\xEDnio consciente de uma
+    for\xE7a da natureza que transformou para sempre a rela\xE7\xE3o do Homo sapiens
+    com o mundo. \n\nAl\xE9m de oferecer calor e prote\xE7\xE3o contra predadores,
+    o fogo permitiu cozinhar alimentos, tornando-os mais nutritivos e contribuindo
+    diretamente para o desenvolvimento do c\xE9rebro humano ao longo de mil\xEAnios.
+    Reunidos ao redor das chamas, nossos ancestrais criaram os primeiros la\xE7os
+    sociais, compartilharam hist\xF3rias e desenvolveram rituais, fazendo da fogueira
+    o ber\xE7o da linguagem, da cultura e da civiliza\xE7\xE3o."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 

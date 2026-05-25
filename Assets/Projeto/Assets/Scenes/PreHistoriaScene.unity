@@ -2983,16 +2983,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
-  subtitleText: "Ca\xE7adores em Bando: A Intelig\xEAncia Mortal dos Velociraptores"
-  artifactName: Velociraptores
-  artifactDescription: "Os velociraptores eram dinossauros carn\xEDvoros de pequeno
-    porte, mas extremamente \xE1geis e inteligentes, capazes de coordenar ataques
-    em grupo para abater presas muito maiores do que eles. Cobertos de penas e equipados
-    com uma garra retr\xE1til afiada nos p\xE9s, eram predadores sofisticados que
-    combinavam velocidade, vis\xE3o agu\xE7ada e comportamento social para dominar
-    seu ambiente. \n\nViveram h\xE1 cerca de 75 milh\xF5es de anos na \xC1sia Central,
-    e seu modelo de ca\xE7a em bando os tornou um dos dinossauros mais temidos e
-    estudados da hist\xF3ria."
+  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante"
+  artifactData: {fileID: 11400000, guid: 1b912ee2dd904ce40bbb201790d40a1b, type: 2}
+  artifactName: Esqueleto de Triceratops
+  artifactDescription: "O esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas
+    mais impressionantes j\xE1 descobertas, com seus tr\xEAs chifres imponentes e
+    a enorme gola \xF3ssea que protegia seu pesco\xE7o podendo atingir at\xE9 9 metros
+    de comprimento no total. Cada osso preservado conta uma hist\xF3ria de batalhas,
+    sobreviv\xEAncia e adapta\xE7\xE3o em um mundo dominado por predadores como o
+    Tiranossauro Rex, seu maior "
   interactOnlyOnce: 1
 --- !u!23 &268615466
 MeshRenderer:
@@ -6173,6 +6172,7 @@ MonoBehaviour:
   narrationClip: {fileID: 0}
   subtitleText: "Cabe\xE7a de Pedra: O Mist\xE9rio por Tr\xE1s do Cr\xE2nio mais
     Duro da Pr\xE9-Hist\xF3ria"
+  artifactData: {fileID: 0}
   artifactName: Paquicefalossauro
   artifactDescription: "O paquicefalossauro era um dinossauro herb\xEDvoro conhecido
     pelo seu cr\xE2nio extremamente espesso, que podia chegar a 25 cent\xEDmetros
@@ -6827,6 +6827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
   subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante"
+  artifactData: {fileID: 0}
   artifactName: Esqueleto de Triceratops
   artifactDescription: "O esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas
     mais impressionantes j\xE1 descobertas, com seus tr\xEAs chifres imponentes e
@@ -8871,9 +8872,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exhibits:
-  - {fileID: 0}
   - {fileID: 651569522}
-  - {fileID: 0}
+  - {fileID: 268615465}
+  - {fileID: 706996074}
+  - {fileID: 1024693386}
   progressPanel: {fileID: 1649913424}
   progressText: {fileID: 1873461341}
   progressBar: {fileID: 1578805628}
@@ -10379,6 +10381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrationClip: {fileID: 0}
   subtitleText: "Chamas da Origem: A Fogueira que Mudou a Hist\xF3ria da Humanidade"
+  artifactData: {fileID: 0}
   artifactName: Fogueira
   artifactDescription: "A fogueira dos homens das cavernas representa um dos maiores
     marcos da evolu\xE7\xE3o humana, sendo o primeiro dom\xEDnio consciente de uma

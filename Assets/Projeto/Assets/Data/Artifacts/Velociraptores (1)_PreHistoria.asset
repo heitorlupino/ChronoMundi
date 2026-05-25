@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Velociraptores (1)_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Velociraptores (1)_PreHistoria
+  era: 0
+  subtitleText: "Ossos do Tempo: O Esqueleto que Conta a Hist\xF3ria de um Gigante"
+  artifactName: Esqueleto de Triceratops
+  artifactDescription: "O esqueleto de um Triceratops \xE9 uma das estruturas \xF3sseas
+    mais impressionantes j\xE1 descobertas, com seus tr\xEAs chifres imponentes e
+    a enorme gola \xF3ssea que protegia seu pesco\xE7o podendo atingir at\xE9 9 metros
+    de comprimento no total. Cada osso preservado conta uma hist\xF3ria de batalhas,
+    sobreviv\xEAncia e adapta\xE7\xE3o em um mundo dominado por predadores como o
+    Tiranossauro Rex, seu maior advers\xE1rio. \n\nEstudar seus f\xF3sseis permite
+    aos paleont\xF3logos entender n\xE3o apenas sua anatomia, mas tamb\xE9m seu comportamento
+    social e os \xFAltimos dias da era dos dinossauros."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 

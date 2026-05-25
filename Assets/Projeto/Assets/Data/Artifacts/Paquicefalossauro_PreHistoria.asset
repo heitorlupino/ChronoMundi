@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Paquicefalossauro_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Paquicefalossauro_PreHistoria
+  era: 0
+  subtitleText: "Cabe\xE7a de Pedra: O Mist\xE9rio por Tr\xE1s do Cr\xE2nio mais
+    Duro da Pr\xE9-Hist\xF3ria"
+  artifactName: Paquicefalossauro
+  artifactDescription: "O paquicefalossauro era um dinossauro herb\xEDvoro conhecido
+    pelo seu cr\xE2nio extremamente espesso, que podia chegar a 25 cent\xEDmetros
+    de espessura, usado provavelmente em disputas territoriais entre machos. Viveu
+    no final do Cret\xE1ceo, h\xE1 cerca de 70 milh\xF5es de anos, e se locomovia
+    em duas patas pelas florestas e plan\xEDcies da Am\xE9rica do Norte. \n\nApesar
+    de seu aspecto intimidador, era um animal de m\xE9dio porte, e seu cr\xE2nio
+    abobadado permanece at\xE9 hoje um dos tra\xE7os mais fascinantes e debatidos
+    da paleontologia."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 

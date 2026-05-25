@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: InteligenciaArticial_FuturoTech
+  m_EditorClassIdentifier: 
+  artifactID: InteligenciaArticial_FuturoTech
+  era: 2
+  subtitleText: "Esfera do Amanh\xE3: A Intelig\xEAncia Artificial que Habita a Luz"
+  artifactName: "Intelig\xEAncia Artificial"
+  artifactDescription: "O globo hologr\xE1fico \xE9 a manifesta\xE7\xE3o visual de
+    uma intelig\xEAncia artificial viva, pulsando em camadas de luz e dados que giram
+    e se reorganizam em tempo real conforme processa e interpreta o mundo ao seu
+    redor. \n\nMais do que uma interface, ele \xE9 uma entidade digital consciente,
+    capaz de conversar, raciocinar e projetar simula\xE7\xF5es complexas do futuro
+    diretamente no espa\xE7o tridimensional ao redor dos usu\xE1rios. Sua forma esf\xE9rica
+    n\xE3o \xE9 apenas est\xE9tica, representa a totalidade do conhecimento humano
+    digitalizado, um universo de informa\xE7\xE3o condensado em um \xFAnico ponto
+    luminoso e pulsante."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 

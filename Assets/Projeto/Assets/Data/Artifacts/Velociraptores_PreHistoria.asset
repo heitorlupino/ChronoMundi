@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: Velociraptores_PreHistoria
+  m_EditorClassIdentifier: 
+  artifactID: Velociraptores_PreHistoria
+  era: 0
+  subtitleText: "Ca\xE7adores em Bando: A Intelig\xEAncia Mortal dos Velociraptores"
+  artifactName: Velociraptores
+  artifactDescription: "Os velociraptores eram dinossauros carn\xEDvoros de pequeno
+    porte, mas extremamente \xE1geis e inteligentes, capazes de coordenar ataques
+    em grupo para abater presas muito maiores do que eles. Cobertos de penas e equipados
+    com uma garra retr\xE1til afiada nos p\xE9s, eram predadores sofisticados que
+    combinavam velocidade, vis\xE3o agu\xE7ada e comportamento social para dominar
+    seu ambiente. \n\nViveram h\xE1 cerca de 75 milh\xF5es de anos na \xC1sia Central,
+    e seu modelo de ca\xE7a em bando os tornou um dos dinossauros mais temidos e
+    estudados da hist\xF3ria."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 

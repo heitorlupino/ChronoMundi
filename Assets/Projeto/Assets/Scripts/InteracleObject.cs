@@ -50,6 +50,6 @@ public class InteracleObject : MonoBehaviour, IInteractable
             OnInteracted?.Invoke(this);
         }
     }
-
+    
     public bool HasBeenInteracted => _hasBeenInteracted;
 }

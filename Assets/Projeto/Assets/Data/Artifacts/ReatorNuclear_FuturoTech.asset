@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb81537b7e483f441a60d0fcc60f2de2, type: 3}
+  m_Name: ReatorNuclear_FuturoTech
+  m_EditorClassIdentifier: 
+  artifactID: ReatorNuclear_FuturoTech
+  era: 2
+  subtitleText: "Cora\xE7\xE3o de Estrela: O Reator que Alimenta a Civiliza\xE7\xE3o
+    do Futuro"
+  artifactName: Reator Nuclear
+  artifactDescription: "O reator futurista \xE9 a fonte de energia mais poderosa
+    j\xE1 constru\xEDda pela humanidade, replicando o mesmo processo que ocorre no
+    interior das estrelas ao fundir \xE1tomos em temperaturas de milh\xF5es de graus
+    para liberar uma energia praticamente infinita e limpa. \n\nSeu n\xFAcleo pulsante
+    emite uma luz azulada intensa, envolto em campos magn\xE9ticos colossal que cont\xEAm
+    e controlam o plasma superaquecido que gera eletricidade suficiente para alimentar
+    cidades inteiras com um \xFAnico ciclo de fus\xE3o. Mais do que uma m\xE1quina,
+    o reator \xE9 o s\xEDmbolo do maior salto evolutivo da civiliza\xE7\xE3o humana,
+    o momento em que a humanidade finalmente deixou de depender do planeta para gerar
+    energia e passou a dominar a for\xE7a do pr\xF3prio cosmos."
+  narrationClip: {fileID: 0}
+  textAuthor: Capturado da Cena
+  lastRevision: 2026-05
+  devNotes: 
